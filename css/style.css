@@ -1,0 +1,260 @@
+/* stats-and-filters todo-item  */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body { height: 100%; width: 100%; }
+
+body {
+  font-family: Tahoma, "Segoe UI",Arial;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+/* کانتینر */
+.container {
+  margin-top: 10px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.952);
+  width: 100%;
+  max-width: 700px;
+  padding: 28px;
+}
+
+
+
+/* هدر */
+.header {
+  text-align: center;
+}
+.header h1 { font-size: 1.9rem; color: #2b3aee; margin-bottom: 6px; }
+.header p { color: #666; font-size: 0.95rem;margin-bottom: 20px;}
+
+/* ورودی */
+.input-section { margin-bottom: 18px; }
+.input-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+#todoInput, #todoDate {
+  padding: 12px 14px;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all .2s ease;
+  background: #fff;
+  outline: none;
+}
+#todoInput:focus, #todoDate:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102,126,234,0.12);
+}
+#todoInput { flex: 2; min-width: 0; } /* allow shrinking */
+#todoDate { flex: 0 0 150px; }
+
+/* دکمه افزودن */
+#addBtn {
+  padding: 12px 18px;
+  background: #667eea;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#addBtn:active { transform: translateY(1px); }
+#addBtn:hover { box-shadow: 0 6px 18px rgba(102,126,234,0.28); }
+
+/* hint */
+.small-hint { margin-top: 8px; color: #888; font-size: 0.85rem; }
+
+/* آمار و فیلترها */
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background: #f7f8fa;
+  border-radius: 10px;
+}
+.stat-item { text-align: center; flex: 1; }
+.stat-number { font-size: 1.25rem; font-weight: 800; color: #667eea; }
+.stat-label { color: #666; font-size: 0.85rem; margin-top: 4px; }
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+}
+.filter-btn {
+  flex: 1;
+  background: #f1f1f1;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all .15s ease;
+}
+.filter-btn.active {
+  background: #667eea;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(102,126,234,0.24);
+}
+
+/* لیست وظایف */
+#todoList { list-style: none; margin: 10px 0 14px 0; max-height: 210px;  min-height: 210px;overflow:auto; padding-right: 4px; }
+.todo-item {
+  background: #fbfbfd;
+  padding: 10px 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform .2s ease, opacity .2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.455);
+}
+
+.todo-item:hover { transform: translateX(-4px); }
+.todo-item.completed { opacity: 0.6; }
+
+.todo-main { display:flex; align-items:center; gap:10px; flex:1; min-width: 0; }
+.checkbox { width: 20px; height: 20px; accent-color: #22b14c; cursor:pointer; flex:0 0 20px; }
+.todo-text {
+  font-size: 1rem;
+  color: #333;
+  word-break: break-word;
+  cursor: text;
+  flex:1;
+  min-width: 0;
+}
+.todo-text.editing { padding: 6px; border-radius: 6px; border: 1px dashed #ccc; }
+
+.todo-meta {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  gap:4px;
+  margin-left: 12px;
+  flex: 0 0 auto;
+}
+.todo-date { font-size: 0.82rem; color: #666; }
+.todo-id { display:none; font-size: 0.75rem; color:#aaa; }
+
+/* دکمه حذف */
+.actions { display:flex; gap:8px; align-items:center; margin-right: 8px; }
+.delete-btn {
+  background: #ff6b6b;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform .12s ease;
+}
+.delete-btn:hover { transform: scale(1.03); }
+
+/* انیمیشن حذف */
+.todo-item.removing {
+  opacity: 0;
+  transform: translateX(30px) scale(.98);
+}
+
+/* دکمه پاک کردن همه */
+.clear-all-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* === دکمه ویرایش === */
+.edit-btn {
+    background: #4dabf7;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    margin-right: 5px;
+  }
+
+  .edit-btn:hover {
+    background: #339af0;
+    transform: scale(1.05);
+  }
+
+  /* === پیام Toast === */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #667eea;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 1em;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    z-index: 1000;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+/* حالت خالی */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .empty-state-icon {
+    font-size: 4rem; /* بزرگ */
+    margin-bottom: 12px;
+  }
+
+  .empty-state-text {
+    font-size: 1.4rem; /* بزرگ‌تر از متن عادی */
+    font-weight: 600;
+  }
+
+
+.clear-all-btn:disabled { background: #d6d6d6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+
+
+/* واکنشگرایی */
+@media (max-width: 640px) {
+  .input-row { flex-direction: column; align-items: stretch; }
+  #todoDate { flex: 1 0 auto; }
+  .todo-meta { display:none; } /* کوچک: مخفی کردن متا برای صرفه‌جویی فضا */
+  .filter-buttons { flex-direction: column; }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fa" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-do list</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1 id="appTitle">My to-do list 📝</h1>
+      <p id="subtitle">Manage today's tasks</p>
+    </div>
+
+    <div class="input-section">
+      <div class="input-row">
+        <input type="text" id="todoInput" placeholder="Enter new task..."/>
+        <input type="date" id="todoDate"/>
+        <button id="addBtn">Add</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat-item">
+          <div class="stat-label">
+            <button class="filter-btn active" data-filter="all" id="filterAll">Tasks</button>
+          </div>
+          <div class="stat-number" id="totalCount">0</div>
+      </div>
+      <div class="stat-item">
+          <div class="stat-label">
+            <button class="filter-btn" data-filter="active" id="filterActive">Active Tasks</button>
+          </div>
+          <div class="stat-number" id="activeCount">0</div>
+      </div>
+      <div class="stat-item">
+          <div class="stat-label">
+            <button class="filter-btn" data-filter="completed" id="filterCompleted">Tasks done</button>
+          </div>
+          <div class="stat-number" id="completedCount">0</div>
+      </div>
+    </div>
+
+
+    <ul id="todoList" aria-live="polite"></ul>
+
+    <button id="clearAllBtn" class="clear-all-btn" disabled>Clear all</button>
+
+  </div>
+  <div id="toast" class="toast"></div>
+
+
+  <script src="../js/script.js"></script>
+</body>
+</html>
